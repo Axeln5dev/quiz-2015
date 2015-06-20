@@ -5,7 +5,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var favicon = require('serve-favicon');
+var partials = require('express-partials');
 
+// Cargamos index.js donde esta la deficnicion de las rutas
 var routes = require('./routes/index');
 
 var app = express();
@@ -21,7 +23,20 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(partials());
 
+
+/* Variable que se muestra en ell template */
+var metadata = require('./package.json');
+app.use(function (req, res, next) {
+  res.locals = {
+    title: metadata.name,
+    version: metadata.version
+  };
+  next();
+});
+
+// Importamos nuestro enrutador
 app.use('/', routes);
 
 // catch 404 and forward to error handler

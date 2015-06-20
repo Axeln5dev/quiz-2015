@@ -4,9 +4,8 @@
 
 // Metodo manejador de la peticion GET '/question'
 exports.question = function(req, res) {
-  console.log('en quesion');
   res.render('quizes/question', {
-    'quiz_question': 'Cual es la capital de Italia?'
+    'quiz_question': '¿Cual es la capital de Italia?'
   });
 };
 

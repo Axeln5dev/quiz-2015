@@ -1,13 +1,17 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <form action='/answer' methos='get'>
-      <p><b><%=quiz_question %></b></p>
-      <input type="text" name="answer"/>
-      <input type="submit" value="Enviar"/>
-    </form>
-  </body>
-</html>
+<form action='/answer' methos='get'>
+  <div class="div-question">
+    <%=quiz_question %>
+  </div>
+  <div>
+    <input type="text" name="answer"/>
+  </div>
+  <div>
+    <input type="submit" value="Enviar"/>
+  </div>
+  <div>
+    <input type="button" value="Volver" onClick="location = '/'"/>
+  </div>
+  <script>
+    document.forms[0].answer.focus();
+  </script>
+</form>
