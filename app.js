@@ -25,7 +25,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(partials());
 
-
 /* Variable que se muestra en ell template */
 var metadata = require('./package.json');
 app.use(function (req, res, next) {

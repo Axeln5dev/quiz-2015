@@ -1,73 +1,44 @@
+* {
+  margin: 0; padding: 0;
+}
+
 body {
+  font: 16px Georgia, serif;
   margin: 0px;
-  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
-  padding:0;
-  height: 500px;
-  min-height: 100%;
 }
 
-header {
-  margin: 0px;
-  height: 15%;
-  background-color: #21252b;
-  color: #99a5af;
-  padding: 1px;
+#page-wrap {
+  color: white;
 }
 
-nav {
-  margin: 0px;
-  height: 5%;
-  background-color: #31363f;
-  color: #99a5af;
-  padding: 1px;
+#page-wrap > .main   {
+  border: 0px solid #999; padding: 1%;
 }
 
-section {
-  margin: 0px;
-  height: 100%;
-  background-color: #282c34;
-  color: #99a5af;
-  padding: 1px;
-  min-height: 50%;
-}
+section > div        { padding: 0px; }
+header { background: #21252b; text-align: center;}
+nav { background: #31363f; text-align: center;}
+section { background: #282c34; text-align: center;}
+footer               { background: #21252b; text-align: center;}
+nav span             { margin: 0px 0px 0px 0px;
+  					   width: 100%;
+  					   display: inline-block;}
 
-footer {
-  margin: 0px;
-  height: 10%;
-  background-color: #21252b;
-  color: #99a5af;
-  padding: 1px;
-}
+#ErrorMsgs           { color: #f61; font-size: smaler}
 
-header > div {
-  margin-left: 10px;
-  margin-top: 10px;
-  font-size: 40px;
-  color: #99a5af;
-}
 
-section > div {
-  margin-top: 5px;
-  margin-left: 5px;
-}
-
-footer > div {
-  margin-left: 10px;
-  margin-top: 10px;
-}
-
-footer > a {
+a {
   text-decoration: none;
   color: #99a5af;
 }
 
-footer > a:visited {
+a:visited {
   text-decoration: none;
   color: #99a5af;
 }
 
 a {
-  font-size: 10px;
+  font-size: 14px;
   text-decoration: none;
   color: #99a5af;
 }
