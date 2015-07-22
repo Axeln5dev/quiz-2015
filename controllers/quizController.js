@@ -1,8 +1,21 @@
 var models = require('../models/models');
 
-/*
- * Controlador para las peticiones relaciondas con las preguntas y respuestas del juego QUIZ 2015
- */
+// Autoload - Factoriza el codigo si la ruta contiene quizId
+exports.load = function(req, res, next, quizId) {
+  console.log('autoload!!!');
+  models.Quiz.find(quizId).then(
+    function(quiz) {
+      if (quiz) {
+        req.quiz = quiz;
+        next();
+      } else {
+        next(new Error('No existe ' + quizId));
+      }
+    }
+  ).catch(function(error){
+    next(error);
+  });
+};
 
 // Metodo manejador de la peticion GET '/quizes?search=texto_a_buscar'
 exports.search = function(req, res) {
@@ -27,29 +40,23 @@ exports.index = function(req, res) {
 
 // Metodo manejador de la peticion GET '/quizes/:quizId'
 exports.show = function(req, res) {
-  models.Quiz.find(req.params.quizId).then(function(result) {
-    res.render('quizes/show', {
-      quiz: result
-    });
+  res.render('quizes/show', {
+    quiz: req.quiz
   });
 };
 
 // Metodo manejador de la peticion GET '/quizes/:quizId/answer'
 exports.answer = function(req, res) {
-  models.Quiz.find(req.params.quizId).then(function(results) {
-    // Evaluamos la respuesta y componemos el mensaje con el que responder
-    if (req.query.answer.toLowerCase() === results.respuesta.toLowerCase()) {
-      // Enviamos respuesta a la vista
-      res.render('quizes/answer', {
-        'message': 'Enhorabuena!! la respuesta ' + results.respuesta + ' es correcta.'
-      });
-    } else {
-      // Enviamos respuesta a la vista
-      res.render('quizes/answer', {
-        'message': 'Ooohhh!! la respuesta es incorrecta. La respuesta correcta es ' + results.respuesta
-      });
-    }
-
-
-  });
+  // Evaluamos la respuesta y componemos el mensaje con el que responder
+  if (req.query.answer.toLowerCase() === req.quiz.respuesta.toLowerCase()) {
+    // Enviamos respuesta a la vista
+    res.render('quizes/answer', {
+      'message': 'Enhorabuena!! la respuesta ' + req.quiz.respuesta + ' es correcta.'
+    });
+  } else {
+    // Enviamos respuesta a la vista
+    res.render('quizes/answer', {
+      'message': 'Ooohhh!! la respuesta es incorrecta. La respuesta correcta es ' + req.quiz.respuesta
+    });
+  }
 };

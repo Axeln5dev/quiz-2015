@@ -11,6 +11,8 @@ router.get('/', function(req, res, next) {
   res.render('index', {});
 });
 
+router.param('quizId', quizController.load); // Autoload
+
 // Definicion de rutas que manejara quizController
 router.get('/quizes', quizController.index);
 router.get('/quizes/:quizId(\\d+)', quizController.show);
