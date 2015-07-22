@@ -36,14 +36,23 @@ exports.Quiz = Quiz;
 sequelize.sync().success(function() {
   // success se ejecuta una vez sincronizados los modelos y por lo tanto las tablas
   Quiz.count().success(function(count) {
-    if (count === 0) {
+    // Creamos datos en el entorno de produccion
+    if (count === 1) {
       Quiz.create({
-        pregunta: 'Capital de Italia',
-        respuesta: 'Roma'
+        pregunta: 'Capital de Francia',
+        respuesta: 'Paris'
       });
       Quiz.create({
-        pregunta: 'Capital de Portugal',
-        respuesta: 'Lisboa'
+        pregunta: 'Capital de Alemania',
+        respuesta: 'Berlin'
+      });
+      Quiz.create({
+        pregunta: 'Capital de España',
+        respuesta: 'Madrid'
+      });
+      Quiz.create({
+        pregunta: 'Capital de Rusia',
+        respuesta: 'Moscú'
       })
       .success(function() {
         console.log('Base de datos inicializada correctamente.')
