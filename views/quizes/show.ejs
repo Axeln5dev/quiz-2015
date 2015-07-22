@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<form action='/answer' methos='get'>
+<form action='/quizes/<%= quiz.id %>/answer' methos='get'>
   <div class="div-question">
-    <%=quiz_question %>
+    <%= quiz.pregunta %>
   </div>
   <div>
     <input type="text" name="answer"/>

@@ -12,8 +12,9 @@ router.get('/', function(req, res, next) {
 });
 
 // Definicion de rutas que manejara quizController
-router.get('/question', quizController.question);
-router.get('/answer', quizController.answer);
+router.get('/quizes', quizController.index);
+router.get('/quizes/:quizId(\\d+)', quizController.show);
+router.get('/quizes/:quizId(\\d+)/answer', quizController.answer);
 
 // Definicion de rutas que maneja los creadores de la pagina
 router.get('/author', authorController.author);
