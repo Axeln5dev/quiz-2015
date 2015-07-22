@@ -17,25 +17,25 @@ exports.load = function(req, res, next, quizId) {
   });
 };
 
-// Metodo manejador de la peticion GET '/quizes?search=texto_a_buscar'
-exports.search = function(req, res) {
-  var searchString = '%' + req.query.search.replace(' ', '%') + '%';
-  console.log('searchString: ' + searchString);
-  models.Quiz.findAll({ where: ["pregunta like ?", searchString] }).then(function(results) {
-    console.log(JSON.stringify(results));
-    res.render('quizes/question', {
-      'quiz_question': results[0].pregunta
-    });
-  });
-};
-
 // Metodo manejador de la peticion GET '/quizes'
 exports.index = function(req, res) {
-  models.Quiz.findAll().then(function(results) {
-    res.render('quizes/index', {
-      quizes: results
+  if (req.query.search) {
+    var searchString = '%' + req.query.search.replace(' ', '%') + '%';
+    console.log('searchString: ' + searchString);
+    models.Quiz.findAll({ where: ["pregunta like ?", searchString] }).then(function(results) {
+      console.log(JSON.stringify(results));
+      res.render('quizes/index', {
+        quizes: results
+      });
     });
-  });
+  } else {
+    models.Quiz.findAll().then(function(results) {
+      res.render('quizes/index', {
+        quizes: results
+      });
+    });
+
+  }
 };
 
 // Metodo manejador de la peticion GET '/quizes/:quizId'
