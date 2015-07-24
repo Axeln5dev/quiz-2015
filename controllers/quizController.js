@@ -60,3 +60,19 @@ exports.answer = function(req, res) {
     });
   }
 };
+
+// Manejador del GET /quizes/new
+exports.new = function(req, res) {
+  var quiz = models.Quiz.build({pregunta: 'pregunta', respuesta: 'respuesta'});
+
+  res.render('quizes/new', {quiz: quiz});
+};
+
+// Manejador del POST /quizes/create
+exports.create = function(req, res) {
+  var quiz = models.Quiz.build(req.body.quiz);
+
+  quiz.save({fields: ['pregunta', 'respuesta']}).then(function() {
+    res.redirect('/quizes');
+  });
+};

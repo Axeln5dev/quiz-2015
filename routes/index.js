@@ -17,6 +17,8 @@ router.param('quizId', quizController.load); // Autoload
 router.get('/quizes', quizController.index);
 router.get('/quizes/:quizId(\\d+)', quizController.show);
 router.get('/quizes/:quizId(\\d+)/answer', quizController.answer);
+router.get('/quizes/new', quizController.new);
+router.post('/quizes/create', quizController.create);
 
 // Definicion de rutas que maneja los creadores de la pagina
 router.get('/author', authorController.author);
