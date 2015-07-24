@@ -8,7 +8,10 @@
   <br/>
   <table>
   <% for (var x = 0; x < quizes.length; x++) { %>
-      <tr><td><a href='/quizes/<%=quizes[x].id%>'><%=quizes[x].pregunta %></a></td></tr>
+      <tr>
+        <td><a href='/quizes/<%=quizes[x].id%>'><%=quizes[x].pregunta %></a></td>
+        <td><a href='/quizes/<%=quizes[x].id%>/edit'>EDITAR</a></td>
+      </tr>
   <% } %>
   </table>
   <a href='/quizes/new'><input type="button" value='Crear Pregunta'/></a>
