@@ -113,4 +113,13 @@ exports.update = function(req, res) {
       });
     }
   });
-}
+};
+
+exports.destroy = function(req, res, next) {
+  req.quiz.destroy().then(function() {
+    console.log('fasdfasdfasd');
+    res.redirect('/quizes');
+  }).catch(function(error) {
+    next(error);
+  });
+};

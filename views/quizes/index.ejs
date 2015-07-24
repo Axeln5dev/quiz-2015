@@ -11,6 +11,11 @@
       <tr>
         <td><a href='/quizes/<%=quizes[x].id%>'><%=quizes[x].pregunta %></a></td>
         <td><a href='/quizes/<%=quizes[x].id%>/edit'>EDITAR</a></td>
+      <td>
+          <form action='/quizes/<%=quizes[x].id%>?_method=delete' method="post">
+            <button type="submit" onclick="return confirm('Estas seguro?')"><a>ELIMINAR</a></button>
+          </form>
+      </td>
       </tr>
   <% } %>
   </table>
