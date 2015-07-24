@@ -25,13 +25,15 @@ exports.index = function(req, res) {
     models.Quiz.findAll({ where: ["pregunta like ?", searchString] }).then(function(results) {
       console.log(JSON.stringify(results));
       res.render('quizes/index', {
-        quizes: results
+        quizes: results,
+        errors: []
       });
     });
   } else {
     models.Quiz.findAll().then(function(results) {
       res.render('quizes/index', {
-        quizes: results
+        quizes: results,
+        errors: []
       });
     });
 
@@ -41,7 +43,8 @@ exports.index = function(req, res) {
 // Metodo manejador de la peticion GET '/quizes/:quizId'
 exports.show = function(req, res) {
   res.render('quizes/show', {
-    quiz: req.quiz
+    quiz: req.quiz,
+    errors: []
   });
 };
 
@@ -51,12 +54,14 @@ exports.answer = function(req, res) {
   if (req.query.answer.toLowerCase() === req.quiz.respuesta.toLowerCase()) {
     // Enviamos respuesta a la vista
     res.render('quizes/answer', {
-      'message': 'Enhorabuena!! la respuesta ' + req.quiz.respuesta + ' es correcta.'
+      'message': 'Enhorabuena!! la respuesta ' + req.quiz.respuesta + ' es correcta.',
+      errors: []
     });
   } else {
     // Enviamos respuesta a la vista
     res.render('quizes/answer', {
-      'message': 'Ooohhh!! la respuesta es incorrecta. La respuesta correcta es ' + req.quiz.respuesta
+      'message': 'Ooohhh!! la respuesta es incorrecta. La respuesta correcta es ' + req.quiz.respuesta,
+      errors: []
     });
   }
 };
@@ -65,14 +70,24 @@ exports.answer = function(req, res) {
 exports.new = function(req, res) {
   var quiz = models.Quiz.build({pregunta: 'pregunta', respuesta: 'respuesta'});
 
-  res.render('quizes/new', {quiz: quiz});
+  res.render('quizes/new', {
+    quiz: quiz,
+    errors: []
+  });
 };
 
 // Manejador del POST /quizes/create
 exports.create = function(req, res) {
   var quiz = models.Quiz.build(req.body.quiz);
 
-  quiz.save({fields: ['pregunta', 'respuesta']}).then(function() {
-    res.redirect('/quizes');
-  });
+  quiz.validate().then(function(err) {
+    console.log('ERROR:::> ' + err);
+    if (err) {
+      res.render('quizes/new', {quiz: quiz, errors: err.errors});
+    } else {
+      quiz.save({fields: ['pregunta', 'respuesta']}).then(function() {
+        res.redirect('/quizes');
+      });
+    }
+  })
 };

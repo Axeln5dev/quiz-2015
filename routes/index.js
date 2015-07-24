@@ -8,7 +8,9 @@ var authorController = require('../controllers/authorController');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', {});
+  res.render('index', {
+    errors: []
+  });
 });
 
 router.param('quizId', quizController.load); // Autoload
