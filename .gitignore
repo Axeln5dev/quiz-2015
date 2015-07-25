@@ -3,3 +3,4 @@
 node_modules
 quiz.sqlite
 .env
+Migrations.md
