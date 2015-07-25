@@ -4,7 +4,8 @@ exports.author = function(req, res) {
     'author': {
         name: 'Alejandro',
         image: '/images/photo.png',
-        description: 'Soy el creador de esta web!!'
+        description: 'Soy el creador de esta web!!',
+        errors: []
       }
   });
 };
