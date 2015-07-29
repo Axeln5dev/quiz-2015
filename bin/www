@@ -6,7 +6,16 @@
 
 var app = require('../app');
 var debug = require('debug')('quiz-2015:server');
-var http = require('http');
+var http = require("http");
+
+// Implementacion de http seguro (https)
+var fs = require("fs");
+var https = require("https");
+
+var options = {
+    key: fs.readFileSync('cert/quiz-2015-key.pem').toString(),
+    cert: fs.readFileSync('cert/quiz-2015-cert.pem').toString()
+};
 
 /**
  * Get port from environment and store in Express.
@@ -18,8 +27,15 @@ app.set('port', port);
 /**
  * Create HTTP server.
  */
-
 var server = http.createServer(app);
+
+/*
+ * Secure server
+ */
+var serverSecure = https.createServer(options, app);
+serverSecure.listen(8443, function() {
+  debug('Express server listening on port ' + server.address().port);
+});
 
 /**
  * Listen on provided port, on all network interfaces.
