@@ -21,5 +21,11 @@
 
 <p>Comentarios</p>
 <% for(index in quiz.Comments) { %>
-  <p>- <%= quiz.Comments[index].texto %></p>
+  <% if (session.user || quiz.Comments[index].publicado) { %>
+    <p>- <%= quiz.Comments[index].texto %></p>
+      <% if (session.user && !quiz.Comments[index].publicado) { %>
+        <form action='/quizes/<%= quiz.id %>/comments/<%=quiz.Comments[index].id %>/publish?_method=put' method="post">
+        <p><button type="submit">Publicar</button></p>
+      <% } %>
+  <% } %>
 <% } %>

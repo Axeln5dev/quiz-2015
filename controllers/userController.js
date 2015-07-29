@@ -4,7 +4,6 @@ var users = {
 };
 
 exports.autenticar = function(login, password, callback) {
-  console.log('autenticand dentro ....');
   if (users[login]) {
     if (users[login].password === password) {
       callback(null, users[login]);

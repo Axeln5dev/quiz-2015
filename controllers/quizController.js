@@ -23,9 +23,7 @@ exports.load = function(req, res, next, quizId) {
 exports.index = function(req, res) {
   if (req.query.search) {
     var searchString = '%' + req.query.search.replace(' ', '%') + '%';
-    console.log('searchString: ' + searchString);
     models.Quiz.findAll({ where: ["pregunta like ?", searchString] }).then(function(results) {
-      console.log(JSON.stringify(results));
       res.render('quizes/index', {
         quizes: results,
         errors: []
@@ -120,7 +118,6 @@ exports.update = function(req, res) {
 
 exports.destroy = function(req, res, next) {
   req.quiz.destroy().then(function() {
-    console.log('fasdfasdfasd');
     res.redirect('/quizes');
   }).catch(function(error) {
     next(error);
