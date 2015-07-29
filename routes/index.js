@@ -5,6 +5,8 @@ var router = express.Router();
 var quizController = require('../controllers/quizController');
 // Importamos el Controlador de autores de la pagina
 var authorController = require('../controllers/authorController');
+// Importamos el Controlador de autores de la pagina
+var commentController = require('../controllers/commentController');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -24,6 +26,10 @@ router.post('/quizes/create', quizController.create);
 router.get('/quizes/:quizId(\\d+)/edit', quizController.edit);
 router.put('/quizes/:quizId(\\d+)', quizController.update);
 router.delete('/quizes/:quizId(\\d+)', quizController.destroy);
+
+// Definimos las rutas para gestionar comentarios a las preguntas
+router.get('/quizes/:quizId(\\d+)/comments/new', commentController.new);
+router.post('/quizes/:quizId(\\d+)/comments', commentController.create);
 
 // Definicion de rutas que maneja los creadores de la pagina
 router.get('/author', authorController.author);

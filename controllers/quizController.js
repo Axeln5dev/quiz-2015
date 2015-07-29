@@ -2,8 +2,10 @@ var models = require('../models/models');
 
 // Autoload - Factoriza el codigo si la ruta contiene quizId
 exports.load = function(req, res, next, quizId) {
-  console.log('autoload!!!');
-  models.Quiz.find(quizId).then(
+  models.Quiz.find({
+    where: { id: quizId },
+    include: [ {model:  models.Comment} ]
+    }).then(
     function(quiz) {
       if (quiz) {
         req.quiz = quiz;

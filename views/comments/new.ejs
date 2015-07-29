@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<form action='/quizes/<%= quizId %>/comments' method='post'>
+  <div class="div-question">
+    Introduce un comentario
+  </div>
+  <div>
+    <input type="text" name="comment[texto]"/>
+  </div>
+  <div>
+    <input type="submit" value="Crear Comentario"/>
+  </div>
+  <div>
+    <input type="button" value="Volver" onClick="location = '/quizes/<%= quizId %>/show'"/>
+  </div>
+</form>

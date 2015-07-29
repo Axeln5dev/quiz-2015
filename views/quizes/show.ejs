@@ -16,3 +16,10 @@
     document.forms[0].answer.focus();
   </script>
 </form>
+
+<p><a href="/quizes/<%= quiz.id %>/comments/new"><input type="button" value="Crear Comentario"/></a></p>
+
+<p>Comentarios</p>
+<% for(index in quiz.Comments) { %>
+  <p>- <%= quiz.Comments[index].texto %></p>
+<% } %>

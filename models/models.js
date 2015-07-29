@@ -27,10 +27,16 @@ var sequelize = new Sequelize(DB_name, user, pwd,
   }
 );
 
-// Importamos las definiciones de Modelo
+// Importamos el Modelo y exportamos la definicion de este
 var Quiz = sequelize.import(path.join(__dirname, 'quiz'));
-// Exportamos la definicion del modelo
+var Comment = sequelize.import(path.join(__dirname, 'comment'));
+
+// Definimos las relaciones entre tablas
+Comment.belongsTo(Quiz);
+Quiz.hasMany(Comment);
+
 exports.Quiz = Quiz;
+exports.Comment = Comment;
 
 // Sincronizamos las tablas segun la definicion de los modelos
 sequelize.sync().success(function() {
