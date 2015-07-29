@@ -5,8 +5,10 @@ var router = express.Router();
 var quizController = require('../controllers/quizController');
 // Importamos el Controlador de autores de la pagina
 var authorController = require('../controllers/authorController');
-// Importamos el Controlador de autores de la pagina
+// Importamos el Controlador de comentarios de la pagina
 var commentController = require('../controllers/commentController');
+// controller de session
+var sessionController = require('../controllers/sessionController');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -16,6 +18,11 @@ router.get('/', function(req, res, next) {
 });
 
 router.param('quizId', quizController.load); // Autoload
+
+// Definicion de las rutas para el manejador de sesiones
+router.get('/login', sessionController.new);
+router.post('/login', sessionController.create);
+router.get('/logout', sessionController.destroy);
 
 // Definicion de rutas que manejara quizController
 router.get('/quizes', quizController.index);
