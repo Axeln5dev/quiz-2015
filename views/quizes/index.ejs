@@ -11,14 +11,18 @@
       <tr>
         <td><a href='/quizes/<%=quizes[x].id%>'><%=quizes[x].pregunta %></a></td>
         <td><a href='/quizes/<%=quizes[x].id%>'><%=quizes[x].tema %></a></td>
-        <td><button><a href='/quizes/<%=quizes[x].id%>/edit'>EDITAR</a></button></td>
-      <td>
-          <form action='/quizes/<%=quizes[x].id%>?_method=delete' method="post">
-            <button type="submit" onclick="return confirm('Estas seguro?')"><a>ELIMINAR</a></button>
-          </form>
-      </td>
+        <% if (session.user) { %>
+          <td><button><a href='/quizes/<%=quizes[x].id%>/edit'>EDITAR</a></button></td>
+          <td>
+              <form action='/quizes/<%=quizes[x].id%>?_method=delete' method="post">
+                <button type="submit" onclick="return confirm('Estas seguro?')"><a>ELIMINAR</a></button>
+              </form>
+          </td>
+        <% } %>
       </tr>
   <% } %>
   </table>
-  <a href='/quizes/new'><input type="button" value='Crear Pregunta'/></a>
+  <% if (session.user) { %>
+    <a href='/quizes/new'><input type="button" value='Crear Pregunta'/></a>
+  <% } %>
 </form>
