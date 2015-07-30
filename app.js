@@ -51,6 +51,20 @@ app.use(function(req, res, next) {
   next();
 });
 
+
+// MW que comprueba el tienmpo de inactividad
+app.use(function(req, res, next) {
+  var nowInMillis = (new Date).getTime();
+
+  if (req.session.user && (nowInMillis - req.session.user.loginDate) > 120000) {
+    delete req.session.user;
+    res.redirect('/login');
+  }
+
+  next();
+});
+
+
 // Importamos nuestro enrutador
 app.use('/', routes);
 

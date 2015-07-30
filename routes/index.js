@@ -9,6 +9,8 @@ var authorController = require('../controllers/authorController');
 var commentController = require('../controllers/commentController');
 // controller de session
 var sessionController = require('../controllers/sessionController');
+// Controlador de estadisticas
+var statisticsController = require('../controllers/statisticsController');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -39,6 +41,9 @@ router.delete('/quizes/:quizId(\\d+)',    sessionController.loginRequired, quizC
 router.get('/quizes/:quizId(\\d+)/comments/new', commentController.new);
 router.post('/quizes/:quizId(\\d+)/comments', commentController.create);
 router.put('/quizes/:quizId(\\d+)/comments/:commentId/publish',  sessionController.loginRequired, commentController.publish);
+
+// Definimos la ruta para consultar estadisticas
+router.get('/statistics', statisticsController.index);
 
 // Definicion de rutas que maneja los creadores de la pagina
 router.get('/author', authorController.author);
