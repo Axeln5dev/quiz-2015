@@ -1,5 +1,5 @@
 NOTA: Las instrucciones indicadas en este fichero y la ejecución de los comandos indicados corren
-bajo tu propia responsabilidad. 
+bajo tu propia responsabilidad.
 
 
 MIGRACION DE LA BBDD EN LOCAL
@@ -103,8 +103,8 @@ Instruncciones para migrar la BBDD en Heroku sin perder los datos
 
 9. Ejecucion de script de migracion con el comando:
 
-  heroku run node_modules/.bin/sequelize db:migrate  --env production -app <YOUR_APP_NAME>
+  heroku run node_modules/.bin/sequelize db:migrate  --env production -app YOUR_APP_NAME
 
     por ejemplo:
 
-  heroku run node_modules/.bin/sequelize db:migrate  --env production -app <YOUR_APP_NAME>
+  heroku run node_modules/.bin/sequelize db:migrate  --env production -app YOUR_APP_NAME
